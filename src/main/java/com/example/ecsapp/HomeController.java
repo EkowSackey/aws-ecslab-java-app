@@ -15,7 +15,7 @@ public class HomeController {
                 <style>
                   body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f4; }
                   .card { background: white; padding: 24px; border-radius: 8px; max-width: 700px; }
-                  h1 { color: #08293C; }
+                  h1 { color: #08293B; }
                 </style>
               </head>
               <body>
