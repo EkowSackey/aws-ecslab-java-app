@@ -43,3 +43,18 @@ jobs:
       - name: Push Docker image to ECR
         run: |
           docker push ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:$IMAGE_NAME
+
+      - name: Prepare deployment files
+        run: |
+          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_NAME }}
+
+          sed "s|IMAGE_URI_PLACEHOLDER|$IMAGE_URI|g; s|EXECUTION_ROLE_ARN_PLACEHOLDER|arn:aws:iam::593793048595:role/saki-ecs-cicd-lab-stack-TaskExecutionRole-FteUyH0E48OM|g" taskdef.json > taskdef.json.rendered
+          mv taskdef.json.rendered taskdef.json
+
+      - name: Create deployment bundle
+        run: |
+          zip deployment-artifact.zip appspec.yaml taskdef.json
+
+      - name: Upload deployment bundle to S3 for CodePipeline
+        run: |
+          aws s3 cp deployment-artifact.zip s3://saki-ecs-cicd-lab-stack-codepipelineartifactbucket-dsqrsl33sshg/placeholder.zip
