@@ -11,7 +11,7 @@ public class HomeController {
         return """
             <html>
               <head>
-                <title>ECS CI/CD Lab</title>
+                <title>ECS CI/CD Lab: Test before review</title>
                 <style>
                   body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f4; }
                   .card { background: white; padding: 24px; border-radius: 8px; max-width: 700px; }
